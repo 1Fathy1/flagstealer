@@ -5,7 +5,7 @@ import "os"
 
 func main() {
     fmt.Println("hi fathy")
-    f, err := os.Open("read.txt")
+    f, err := os.Open("/root/flag.txt")
     if err != nil {
         fmt.Println("can't open flag: " + err.Error())
     }
